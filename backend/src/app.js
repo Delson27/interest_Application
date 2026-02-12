@@ -25,7 +25,7 @@ const corsOptions = {
     process.env.NODE_ENV === "production"
       ? [
           process.env.FRONTEND_URL, // Add your Vercel URL here
-          "https://interest-calculator-app.vercel.app", // Example
+          "https://interest-application.vercel.app/", // Example
         ]
       : ["http://localhost:3000"],
   credentials: true,
