@@ -20,14 +20,28 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // CORS configuration for production
+const allowedOrigins =
+  process.env.NODE_ENV === "production"
+    ? (
+        process.env.FRONTEND_URL || "https://interest-application.vercel.app"
+      ).split(",")
+    : ["http://localhost:3000"];
+
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? [
-          process.env.FRONTEND_URL, // Add your Vercel URL here
-          "https://interest-application.vercel.app/", // Example
-        ]
-      : ["http://localhost:3000"],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+
+    if (
+      allowedOrigins.some(
+        (allowed) => origin === allowed || origin.startsWith(allowed),
+      )
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200,
 };
