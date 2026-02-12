@@ -1,5 +1,4 @@
-const BASE_URL =
-  process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 /* ================= AUTH ================= */
 
@@ -145,7 +144,7 @@ export const recordPayment = async (transactionId, data, token) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
-    }
+    },
   );
 
   return res.json();
@@ -158,7 +157,7 @@ export const getPaymentHistory = async (transactionId, token) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
   return res.json();

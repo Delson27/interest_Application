@@ -3,6 +3,7 @@
 ## Part 1: Push to GitHub (5 minutes)
 
 ### Step 1: Stage all changes
+
 ```bash
 cd c:\unlox_capstone_project\interest-app
 git add -A
@@ -10,17 +11,20 @@ git status
 ```
 
 ### Step 2: Commit changes
+
 ```bash
 git commit -m "Prepare for deployment - Add guides and documentation"
 ```
 
 ### Step 3: Create GitHub Repository
+
 1. Go to: https://github.com/new
 2. Name: `interest-calculator-app`
 3. Keep all checkboxes UNCHECKED
 4. Click "Create repository"
 
 ### Step 4: Connect and Push
+
 Replace `YOUR-USERNAME` with your GitHub username:
 
 ```bash
@@ -29,6 +33,7 @@ git push -u origin main
 ```
 
 **If asked for credentials:**
+
 - Username: Your GitHub username
 - Password: Use Personal Access Token from https://github.com/settings/tokens
 
@@ -65,6 +70,7 @@ git push -u origin main
    - Start Command: `npm start`
 
 4. **Environment Variables:**
+
    ```
    PORT = 5000
    MONGO_URI = (paste your MongoDB connection string here)
@@ -88,6 +94,7 @@ git push -u origin main
    - Output Directory: `build`
 
 4. **Environment Variable:**
+
    ```
    REACT_APP_API_URL = https://YOUR-BACKEND-URL.onrender.com/api
    ```
@@ -114,6 +121,7 @@ app.use(cors(corsOptions));
 ```
 
 **Push changes:**
+
 ```bash
 git add backend/src/app.js
 git commit -m "Update CORS for production"
@@ -140,14 +148,17 @@ Render will auto-deploy in 3-4 minutes.
 ## 🆘 Need Help?
 
 ### Frontend issues:
+
 - Check Vercel logs: Dashboard → Deployments → Function Logs
 - Check browser console (F12)
 
 ### Backend issues:
+
 - Check Render logs: Dashboard → Logs tab
 - Test: `https://your-backend.onrender.com/api/health`
 
 ### Database issues:
+
 - Verify MongoDB connection string
 - Check Network Access: 0.0.0.0/0 allowed
 - Verify database user credentials
@@ -160,10 +171,12 @@ Update your GitHub README with live links:
 
 ```markdown
 ## 🌐 Live Demo
+
 - **Frontend:** https://interest-calculator-app.vercel.app
 - **Backend API:** https://interest-calculator-backend.onrender.com/api
 
 ## 🧪 Test Credentials
+
 - Email: demo@test.com
 - Password: Demo@123
 ```

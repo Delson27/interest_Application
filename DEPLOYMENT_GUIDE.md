@@ -7,18 +7,21 @@ This guide covers deploying both **Frontend (React)** and **Backend (Node.js/Exp
 ## 📋 Pre-Deployment Checklist
 
 ### 1. Environment Variables Setup
+
 - [ ] Copy `backend/.env.example` to `backend/.env`
 - [ ] Set strong JWT_SECRET for production
 - [ ] Configure MongoDB Atlas connection string
 - [ ] Verify all sensitive data is in .gitignore
 
 ### 2. Code Preparation
+
 - [ ] All tests passing
 - [ ] No console errors
 - [ ] All dependencies in package.json
 - [ ] README.md is complete
 
 ### 3. Database Setup
+
 - [ ] MongoDB Atlas account created
 - [ ] Database cluster created
 - [ ] Network access configured (0.0.0.0/0 or specific IPs)
@@ -29,11 +32,13 @@ This guide covers deploying both **Frontend (React)** and **Backend (Node.js/Exp
 ## 🎯 Recommended Deployment Architecture
 
 ### Option 1: Separate Deployments (Recommended)
+
 - **Frontend:** Vercel or Netlify (Free, Optimized for React)
 - **Backend:** Render or Railway (Free tier available)
 - **Database:** MongoDB Atlas (Free tier: 512MB)
 
 ### Option 2: All-in-One
+
 - **Full Stack:** Render (Both frontend + backend)
 
 ---
@@ -41,10 +46,12 @@ This guide covers deploying both **Frontend (React)** and **Backend (Node.js/Exp
 ## 🗄️ Step 1: MongoDB Atlas Setup (Database)
 
 ### 1.1 Create Account
+
 1. Go to [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
 2. Sign up (free)
 
 ### 1.2 Create Cluster
+
 1. Click "Build a Database"
 2. Choose **FREE** (M0 Sandbox)
 3. Select **Cloud Provider:** AWS
@@ -53,6 +60,7 @@ This guide covers deploying both **Frontend (React)** and **Backend (Node.js/Exp
 6. Click "Create"
 
 ### 1.3 Configure Database Access
+
 1. **Security → Database Access**
 2. Click "Add New Database User"
    - Authentication Method: Password
@@ -62,12 +70,14 @@ This guide covers deploying both **Frontend (React)** and **Backend (Node.js/Exp
 3. Click "Add User"
 
 ### 1.4 Configure Network Access
+
 1. **Security → Network Access**
 2. Click "Add IP Address"
 3. Click "Allow Access from Anywhere" (0.0.0.0/0)
 4. Click "Confirm"
 
 ### 1.5 Get Connection String
+
 1. Click "Connect" on your cluster
 2. Choose "Connect your application"
 3. Copy connection string:
@@ -101,6 +111,7 @@ const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 ### 2.2 Deploy to Vercel
 
 #### Via Vercel Website:
+
 1. Go to [https://vercel.com/signup](https://vercel.com/signup)
 2. Sign up with GitHub
 3. Click "Add New Project"
@@ -119,6 +130,7 @@ const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 9. Get your URL: `https://interest-calculator-app.vercel.app`
 
 #### Via Vercel CLI:
+
 ```bash
 # Install Vercel CLI
 npm install -g vercel
@@ -181,6 +193,7 @@ vercel env add REACT_APP_API_URL production
    - **Start Command:** `npm start`
 
    **Environment Variables:** (Click "Add Environment Variable")
+
    ```
    PORT = 5000
    MONGO_URI = mongodb+srv://interestapp_user:YOUR_PASSWORD@cluster.mongodb.net/interest_app?retryWrites=true&w=majority
@@ -213,6 +226,7 @@ app.use(cors(corsOptions));
 ```
 
 Commit and push changes:
+
 ```bash
 git add backend/src/app.js
 git commit -m "Update CORS for production"
@@ -273,7 +287,7 @@ Render will auto-deploy the changes.
 ### Deploy Both Frontend & Backend Together
 
 1. **Backend:** Follow Step 3 above
-2. **Frontend:** 
+2. **Frontend:**
    - Create another Web Service
    - Root Directory: `.` (root)
    - Build Command: `npm run build`
@@ -288,6 +302,7 @@ Render will auto-deploy the changes.
 ## 🧪 Post-Deployment Testing
 
 ### Test Checklist:
+
 - [ ] Frontend loads without errors
 - [ ] Registration works
 - [ ] Login works and redirects to dashboard
@@ -305,12 +320,15 @@ Render will auto-deploy the changes.
 ### Access Logs:
 
 **Render Backend Logs:**
+
 - Dashboard → Your Service → Logs tab
 
 **Vercel Frontend Logs:**
+
 - Dashboard → Your Project → Deployments → View Function Logs
 
 **MongoDB Atlas:**
+
 - Collections → Browse Collections → Verify data
 
 ---
@@ -331,18 +349,21 @@ Render will auto-deploy the changes.
 ## 💰 Free Tier Limitations
 
 ### Vercel (Frontend)
+
 - ✅ Unlimited deployments
 - ✅ 100GB bandwidth/month
 - ✅ Automatic HTTPS
 - ❌ Cold start after inactivity
 
 ### Render (Backend)
+
 - ✅ 750 hours/month (enough for 1 service 24/7)
 - ✅ Automatic HTTPS
 - ⚠️ **Sleeps after 15 min inactivity**
 - ⚠️ Cold start takes 30-60 seconds
 
 ### MongoDB Atlas
+
 - ✅ 512MB storage (enough for 1000s of transactions)
 - ✅ Shared cluster
 - ❌ No backups on free tier
@@ -352,13 +373,17 @@ Render will auto-deploy the changes.
 ## ⚡ Performance Optimization
 
 ### Keep Backend Awake
+
 Use a cron job service (like cron-job.org) to ping your backend every 10 minutes:
+
 ```
 https://your-backend-url.onrender.com/api/health
 ```
 
 ### Frontend Optimization
+
 Add to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -392,6 +417,7 @@ Add to `package.json`:
 ## 🛠️ Maintenance
 
 ### Update Deployment:
+
 ```bash
 # Make changes locally
 git add .
@@ -404,6 +430,7 @@ git push origin main
 ```
 
 ### Rollback:
+
 ```bash
 # Vercel: Dashboard → Deployments → Previous deployment → Promote to Production
 # Render: Dashboard → Manual Deploy → Select previous commit
@@ -414,11 +441,13 @@ git push origin main
 ## 📱 Custom Domain Setup (Optional)
 
 ### 1. Buy Domain
+
 - Namecheap: ~$10/year
-- GoDaddy: ~$12/year  
+- GoDaddy: ~$12/year
 - Domain.com: ~$10/year
 
 ### 2. Configure Vercel
+
 1. Vercel Dashboard → Your Project → Settings → Domains
 2. Add domain: `interestcalculator.com`
 3. Follow DNS instructions
@@ -428,6 +457,7 @@ git push origin main
 5. Wait for propagation (5-60 minutes)
 
 ### 3. Configure Render
+
 1. Render Dashboard → Your Service → Settings → Custom Domain
 2. Add domain: `api.interestcalculator.com`
 3. Add CNAME record:
@@ -440,11 +470,13 @@ git push origin main
 ## 📊 Monitoring & Analytics
 
 ### Add to Frontend:
+
 - Google Analytics
 - Sentry (Error tracking)
 - Vercel Analytics (built-in)
 
 ### Add to Backend:
+
 - Render Metrics (built-in)
 - MongoDB Atlas Monitoring
 - Custom logging service
@@ -454,22 +486,26 @@ git push origin main
 ## ❓ Troubleshooting
 
 ### Frontend not loading:
+
 - Check Vercel build logs
 - Verify REACT_APP_API_URL is set
 - Check browser console for CORS errors
 
 ### Backend not responding:
+
 - Check Render logs for errors
 - Verify MongoDB connection string
 - Check environment variables
 - Test health endpoint: `https://your-backend.onrender.com/api/health`
 
 ### Database connection failed:
+
 - Verify MongoDB Atlas IP whitelist (0.0.0.0/0)
 - Check database user credentials
 - Test connection string locally first
 
 ### CORS errors:
+
 - Update CORS origins in backend
 - Include both http://localhost:3000 and production URL
 - Redeploy backend after changes
@@ -479,11 +515,13 @@ git push origin main
 ## 🎉 Deployment Complete!
 
 ### Your Live URLs:
+
 - **Frontend:** `https://interest-calculator-app.vercel.app`
 - **Backend:** `https://interest-calculator-backend.onrender.com`
 - **Database:** MongoDB Atlas Cloud
 
 ### Share Your Project:
+
 - Add URLs to README.md
 - Share on LinkedIn/Twitter
 - Add to portfolio

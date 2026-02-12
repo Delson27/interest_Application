@@ -3,6 +3,7 @@
 ## Step 1: Create GitHub Repository
 
 ### Option A: Using GitHub Website
+
 1. Go to [https://github.com/new](https://github.com/new)
 2. Repository details:
    - **Name:** `interest-calculator-app` (or your preferred name)
@@ -14,6 +15,7 @@
 4. Copy the repository URL (e.g., `https://github.com/YOUR-USERNAME/interest-calculator-app.git`)
 
 ### Option B: Using GitHub CLI (if installed)
+
 ```bash
 gh repo create interest-calculator-app --public --source=. --remote=origin
 ```
@@ -51,6 +53,7 @@ git remote add origin https://github.com/YOUR-USERNAME/interest-calculator-app.g
 ```
 
 Verify remote added:
+
 ```bash
 git remote -v
 ```
@@ -60,15 +63,18 @@ git remote -v
 ## Step 5: Push to GitHub
 
 ### First time push:
+
 ```bash
 git push -u origin main
 ```
 
 ### If prompted for credentials:
+
 - **Username:** Your GitHub username
 - **Password:** Use a [Personal Access Token (PAT)](https://github.com/settings/tokens) - NOT your GitHub password
 
 #### Create Personal Access Token:
+
 1. Go to: https://github.com/settings/tokens
 2. Click "Generate new token" → "Generate new token (classic)"
 3. Select scopes: ✅ `repo` (full control)
@@ -129,6 +135,7 @@ git ls-files
 ```
 
 ### Files that SHOULD be ignored (in .gitignore):
+
 - ✅ `backend/.env` - Contains database credentials
 - ✅ `node_modules/` - Large dependency folders
 - ✅ `backend/uploads/*` - Uploaded files
@@ -140,6 +147,7 @@ git ls-files
 ## ⚠️ Troubleshooting
 
 ### Error: "remote origin already exists"
+
 ```bash
 # Remove existing remote
 git remote remove origin
@@ -149,6 +157,7 @@ git remote add origin https://github.com/YOUR-USERNAME/interest-calculator-app.g
 ```
 
 ### Error: "failed to push some refs"
+
 ```bash
 # Pull first (if repo has changes)
 git pull origin main --rebase
@@ -158,10 +167,12 @@ git push origin main
 ```
 
 ### Error: Authentication failed
+
 - Use Personal Access Token instead of password
 - Or set up SSH keys: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 ### Large file error (file > 100MB)
+
 ```bash
 # Remove file from git tracking
 git rm --cached path/to/large/file
@@ -206,6 +217,7 @@ git clone https://github.com/YOUR-USERNAME/interest-calculator-app.git
 ## ✅ Verification Checklist
 
 After pushing to GitHub, verify:
+
 - [ ] All files visible on GitHub (except ignored ones)
 - [ ] README.md displays correctly
 - [ ] No .env files visible
