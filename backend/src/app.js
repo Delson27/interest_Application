@@ -19,7 +19,20 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
+// CORS configuration for production
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? [
+          process.env.FRONTEND_URL, // Add your Vercel URL here
+          "https://interest-calculator-app.vercel.app", // Example
+        ]
+      : ["http://localhost:3000"],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(helmet()); // used to protect app by setting various HTTP headers
